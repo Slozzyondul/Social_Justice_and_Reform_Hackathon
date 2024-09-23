@@ -6,7 +6,6 @@ Therefore, i took part in this issue by coming up with atleast one solution to h
 
 The application will have several features but below are the major ones to be implemented.
 
-Key Features:
 Real-Time Reporting:
 Citizens can report issues (e.g., corruption, service delivery failures, or human rights abuses) directly through the app.
 
