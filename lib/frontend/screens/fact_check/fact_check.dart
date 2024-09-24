@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class NewsFactCheckScreen extends StatefulWidget {
+  const NewsFactCheckScreen({super.key});
+
   @override
   _NewsFactCheckScreenState createState() => _NewsFactCheckScreenState();
 }
@@ -20,7 +22,7 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
     });
 
     // Replace with your News API key and endpoint
-    final String apiKey = 'df463b7e58c84096b6755ea188e5267f';
+    const String apiKey = 'df463b7e58c84096b6755ea188e5267f';
     final String apiUrl =
         'https://newsapi.org/v2/everything?q=$query&apiKey=$apiKey&language=en';
 
@@ -66,35 +68,35 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Fact Check')),
+      appBar: AppBar(title: const Text('Fact Check')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: _inputController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: 'Enter claim to fact-check',
                   border: OutlineInputBorder()),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 if (_inputController.text.isNotEmpty) {
                   factCheck(_inputController.text);
                 }
               },
-              child: Text('Check Fact'),
+              child: const Text('Check Fact'),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             _loading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : _factCheckResult != null
                     ? Expanded(
                         child: SingleChildScrollView(
                           child: Text(
                             _factCheckResult!,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ),
                       )

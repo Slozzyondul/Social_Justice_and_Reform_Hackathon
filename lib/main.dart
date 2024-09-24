@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solop/frontend/screens/fact_check/fact_check.dart';
+import 'package:solop/frontend/screens/splash_screen_wrapper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         useMaterial3: true,
       ),
-      home: NewsFactCheckScreen(),
+      home: const SplashScreenWrapper()
     );
   }
 }
