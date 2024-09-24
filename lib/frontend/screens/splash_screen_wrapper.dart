@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solop/frontend/screens/fact_check/fact_check.dart';
+import 'package:solop/frontend/screens/main_options_screen.dart';
 import 'package:solop/frontend/screens/splash_screen.dart';
 
 class SplashScreenWrapper extends StatefulWidget {
@@ -30,6 +30,6 @@ class _SplashScreenWrapperState extends State<SplashScreenWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading ? const SplashScreen() : const NewsFactCheckScreen();
+    return _isLoading ? const SplashScreen() : const MainOptionScreen();
   }
 }
