@@ -43,5 +43,36 @@ def submit_report():
 
     return jsonify({'message': 'Report submitted successfully'}), 201
 
+#route to view other reports
+@app.route('/reports', methods=['GET'])
+def get_reports():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+
+    # Fetch reports from the database
+    cursor.execute('''
+        SELECT title, description, location, media, verified, status
+        FROM reports
+    ''')
+    reports = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    # Transform fetched data into a list of dictionaries
+    report_list = []
+    for report in reports:
+        report_list.append({
+            'title': report[0],
+            'description': report[1],
+            'location': report[2],
+            'media': report[3] if report[3] else None,
+            'verified': bool(report[4]),
+            'status': report[5]
+        })
+
+    return jsonify(report_list), 200
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
