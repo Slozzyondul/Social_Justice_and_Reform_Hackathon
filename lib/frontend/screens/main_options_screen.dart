@@ -9,7 +9,10 @@ class MainOptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Choose an Option')),
+      appBar: AppBar(
+        title: const Center(child: Text('Choose an Option')),
+        backgroundColor: Colors.grey,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -17,6 +20,7 @@ class MainOptionScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
+                style: const ButtonStyle(backgroundColor: WidgetStateColor.transparent),
                 onPressed: () {
                   // Navigate to Fact Check Screen
                   Navigator.push(
@@ -24,10 +28,11 @@ class MainOptionScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const NewsFactCheckScreen()));
                 },
-                child: const Text('Proceed with Fact Check'),
+                child: const Text('Proceed with Fact Check', style: TextStyle(color: Colors.black),),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               ElevatedButton(
+                style: const ButtonStyle(backgroundColor: WidgetStateColor.transparent),
                 onPressed: () {
                   // Navigate to Report Corruption Screen
                   Navigator.push(
@@ -36,10 +41,11 @@ class MainOptionScreen extends StatelessWidget {
                           builder: (context) =>
                               const ReportCorruptionScreen()));
                 },
-                child: const Text('Report Corruption'),
+                child: const Text('Report Corruption', style: TextStyle(color: Colors.black),),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               ElevatedButton(
+                style: const ButtonStyle(backgroundColor: WidgetStateColor.transparent),
                 onPressed: () {
                   // Navigate to Report Corruption Screen
                   Navigator.push(
@@ -47,7 +53,7 @@ class MainOptionScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const ViewReportsScreen()));
                 },
-                child: const Text('Veiw Corruption Reports'),
+                child: const Text('Veiw Corruption Reports', style: TextStyle(color: Colors.black),),
               ),
             ],
           ),
