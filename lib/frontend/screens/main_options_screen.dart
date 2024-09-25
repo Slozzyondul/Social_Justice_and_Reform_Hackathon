@@ -53,7 +53,7 @@ class MainOptionScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const ViewReportsScreen()));
                 },
-                child: const Text('Veiw Corruption Reports', style: TextStyle(color: Colors.black),),
+                child: const Text('View Corruption Reports', style: TextStyle(color: Colors.black),),
               ),
             ],
           ),

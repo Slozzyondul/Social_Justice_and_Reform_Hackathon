@@ -42,7 +42,7 @@ class _ReportCorruptionScreenState extends State<ReportCorruptionScreen> {
       'verified': _verified,
       'user_id': '1234', // Placeholder user ID
       'date_submitted': DateTime.now().toIso8601String(),
-      'status': 'Pending',
+      'status': 'Pending', // add logic to display status message based on the approval from the board
       'email': _emailController.text,
     };
 

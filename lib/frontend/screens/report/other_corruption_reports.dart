@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:io';
 
 class ViewReportsScreen extends StatefulWidget {
   const ViewReportsScreen({super.key});
@@ -12,6 +13,10 @@ class ViewReportsScreen extends StatefulWidget {
 class _ViewReportsScreenState extends State<ViewReportsScreen> {
   List<dynamic> reports = [];
   bool isLoading = true;
+
+  bool _isValidUrl(String url) {
+    return url.startsWith('http') || url.startsWith('https');
+  }
 
   // Function to fetch reports from the backend
   Future<void> fetchReports() async {
@@ -87,7 +92,9 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                             children: [
                               const SizedBox(height: 10),
                               const Text('Media:'),
-                              Image.network(report['media']), // Assuming media is a URL
+                              _isValidUrl(report['media'])
+                                  ? Image.network(report['media'])
+                                  : Image.file(File(report['media'])),
                             ],
                           ),
                       ],
