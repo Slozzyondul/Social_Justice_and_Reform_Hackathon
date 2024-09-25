@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:solop/frontend/classes/detailed_article_class.dart';
 import 'dart:convert';
 
 class NewsFactCheckScreen extends StatefulWidget {
@@ -11,14 +12,14 @@ class NewsFactCheckScreen extends StatefulWidget {
 
 class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
   final TextEditingController _inputController = TextEditingController();
-  String? _factCheckResult;
+  List<dynamic> _articles = [];
   bool _loading = false;
 
   // Function to call the News API for fact-checking
   Future<void> factCheck(String query) async {
     setState(() {
       _loading = true;
-      _factCheckResult = null;
+      _articles = [];
     });
 
     // Replace with your News API key and endpoint
@@ -31,17 +32,20 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          _factCheckResult = parseNewsFactCheckResult(data);
+          _articles = data['articles'];
         });
       } else {
         setState(() {
-          _factCheckResult =
-              'Failed to retrieve fact-check data. Error code: ${response.statusCode}';
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Error fetching data: ${response.statusCode}'),
+          ));
         });
       }
     } catch (error) {
       setState(() {
-        _factCheckResult = 'An error occurred: $error';
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('An error occurred: $error'),
+        ));
       });
     } finally {
       setState(() {
@@ -50,25 +54,23 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
     }
   }
 
-  // Function to parse the API response
-  String parseNewsFactCheckResult(Map<String, dynamic> data) {
-    if (data['articles'] != null && data['articles'].isNotEmpty) {
-      var articlesList = data['articles']
-          .map((article) => 'Title: ${article['title']}\n'
-              'Source: ${article['source']['name']}\n'
-              'Description: ${article['description'] ?? "No description"}\n')
-          .join('\n\n');
-
-      return articlesList;
-    } else {
-      return 'No fact-check information found for this query.';
-    }
+  // Function to navigate to the detailed article screen
+  void _openArticleDetail(Map<String, dynamic> article) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ArticleDetailScreen(article: article),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Fact Check')),
+      appBar: AppBar(
+        title: const Center(child: Text('Fact Check')),
+        backgroundColor: Colors.grey,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -81,26 +83,49 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: const ButtonStyle(
+                  backgroundColor: WidgetStateColor.transparent),
               onPressed: () {
                 if (_inputController.text.isNotEmpty) {
                   factCheck(_inputController.text);
                 }
               },
-              child: const Text('Check Fact'),
+              child: const Text(
+                'Verify Fact',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             const SizedBox(height: 24),
             _loading
                 ? const CircularProgressIndicator()
-                : _factCheckResult != null
+                : _articles.isNotEmpty
                     ? Expanded(
-                        child: SingleChildScrollView(
-                          child: Text(
-                            _factCheckResult!,
-                            style: const TextStyle(fontSize: 16),
-                          ),
+                        child: ListView.builder(
+                          itemCount: _articles.length,
+                          itemBuilder: (context, index) {
+                            final article = _articles[index];
+                            return Card(
+                              color: Colors.grey,
+                              margin: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: ListTile(
+                                
+                                leading: Image.network(article['urlToImage']),
+                                trailing: Text(article['publishedAt']),
+                                title: Text(
+                                  article['title'],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                subtitle: Text(
+                                  'Source: ${article['source']['name']}',
+                                ),
+                                onTap: () => _openArticleDetail(article),
+                              ),
+                            );
+                          },
                         ),
                       )
-                    : Container(),
+                    : const Text('No articles found.'),
           ],
         ),
       ),

@@ -28,7 +28,7 @@ class MainOptionScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const NewsFactCheckScreen()));
                 },
-                child: const Text('Proceed with Fact Check', style: TextStyle(color: Colors.black),),
+                child: const Text('Fact Check', style: TextStyle(color: Colors.black),),
               ),
               const SizedBox(height: 32),
               ElevatedButton(
