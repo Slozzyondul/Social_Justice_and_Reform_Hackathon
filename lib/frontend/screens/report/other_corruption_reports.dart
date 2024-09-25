@@ -15,7 +15,7 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
 
   // Function to fetch reports from the backend
   Future<void> fetchReports() async {
-    final String apiUrl = 'http://localhost:5000/reports'; // Flask server URL
+    const String apiUrl = 'http://localhost:5000/reports'; // Flask server URL
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -26,7 +26,7 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
         });
       } else {
         // Handle error
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Failed to load reports'),
         ));
         setState(() {
@@ -34,7 +34,7 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
         });
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Error fetching reports'),
       ));
       setState(() {
@@ -53,10 +53,10 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Corruption Reports'),
+        title: const Text('View Corruption Reports'),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: reports.length,
               itemBuilder: (context, index) {
@@ -70,23 +70,23 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                       children: [
                         Text(
                           report['title'] ?? '',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text('Description: ${report['description'] ?? ''}'),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text('Location: ${report['location'] ?? ''}'),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text('Verified: ${report['verified'] ? "Yes" : "No"}'),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text('Status: ${report['status'] ?? ''}'),
                         if (report['media'] != null)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(height: 10),
-                              Text('Media:'),
+                              const SizedBox(height: 10),
+                              const Text('Media:'),
                               Image.network(report['media']), // Assuming media is a URL
                             ],
                           ),

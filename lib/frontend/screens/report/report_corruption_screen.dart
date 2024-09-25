@@ -32,7 +32,7 @@ class _ReportCorruptionScreenState extends State<ReportCorruptionScreen> {
   }
 
   void _submitReport() async {
-    final String apiUrl = 'http://localhost:5000/submit-report';
+    const String apiUrl = 'http://localhost:5000/submit-report';
 
     final Map<String, dynamic> reportData = {
       'title': _titleController.text,
@@ -54,12 +54,12 @@ class _ReportCorruptionScreenState extends State<ReportCorruptionScreen> {
 
     if (response.statusCode == 201) {
       // Report submitted successfully
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Report submitted successfully!'),
       ));
     } else {
       // Handle submission error
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Failed to submit report'),
       ));
     }
@@ -69,7 +69,7 @@ class _ReportCorruptionScreenState extends State<ReportCorruptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Report Corruption'),
+        title: const Text('Report Corruption'),
         backgroundColor: Colors.grey,
       ),
       body: Padding(
@@ -78,27 +78,27 @@ class _ReportCorruptionScreenState extends State<ReportCorruptionScreen> {
           children: [
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(labelText: 'Title'),
+              decoration: const InputDecoration(labelText: 'Title'),
             ),
             TextField(
               controller: _descriptionController,
               maxLines: 4,
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: const InputDecoration(labelText: 'Description'),
             ),
             TextField(
               controller: _locationController,
-              decoration: InputDecoration(labelText: 'Location'),
+              decoration: const InputDecoration(labelText: 'Location'),
             ),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email (Optional)',
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
-                Text('Verified:'),
+                const Text('Verified:'),
                 Switch(
                   value: _verified,
                   onChanged: (value) {
@@ -109,21 +109,21 @@ class _ReportCorruptionScreenState extends State<ReportCorruptionScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
                 ElevatedButton(
                   onPressed: _pickImage,
-                  child: Text('Upload Media'),
+                  child: const Text('Upload Media'),
                 ),
-                SizedBox(width: 10),
-                _imageFile != null ? Text('Media selected') : Container(),
+                const SizedBox(width: 10),
+                _imageFile != null ? const Text('Media selected') : Container(),
               ],
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _submitReport,
-              child: Text('Submit Report'),
+              child: const Text('Submit Report'),
             ),
           ],
         ),
