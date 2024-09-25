@@ -58,20 +58,30 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.grey,
         title: const Text('View Corruption Reports'),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
+          : GridView.builder(
+              padding: const EdgeInsets.all(10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Two items per row
+                crossAxisSpacing: 10, // Space between columns
+                mainAxisSpacing: 10, // Space between rows
+                childAspectRatio: 0.75, // Aspect ratio to avoid overflow
+              ),
               itemCount: reports.length,
               itemBuilder: (context, index) {
                 final report = reports[index];
                 return Card(
-                  margin: const EdgeInsets.all(10),
+                  color: Colors.grey[200],
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 8.0,
+                      runSpacing: 4.0,
                       children: [
                         Text(
                           report['title'] ?? '',
@@ -91,9 +101,8 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 10),
-                              const Text('Media:'),
                               _isValidUrl(report['media'])
-                                  ? Image.network(report['media'])
+                                  ? Image.network(report['media'], fit: BoxFit.cover)
                                   : Image.file(File(report['media'])),
                             ],
                           ),

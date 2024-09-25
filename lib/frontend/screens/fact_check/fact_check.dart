@@ -74,6 +74,7 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: _inputController,
@@ -100,26 +101,83 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
                 ? const CircularProgressIndicator()
                 : _articles.isNotEmpty
                     ? Expanded(
-                        child: ListView.builder(
+                        child: GridView.builder(
+                          padding: const EdgeInsets.all(10),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, // Number of items per row
+                            crossAxisSpacing:
+                                10, // Horizontal space between grid items
+                            mainAxisSpacing:
+                                10, // Vertical space between grid items
+                            childAspectRatio:
+                                0.8, // Adjust the ratio to fit the content properly
+                          ),
                           itemCount: _articles.length,
                           itemBuilder: (context, index) {
                             final article = _articles[index];
                             return Card(
                               color: Colors.grey,
                               margin: const EdgeInsets.symmetric(vertical: 8.0),
-                              child: ListTile(
-                                
-                                leading: Image.network(article['urlToImage']),
-                                trailing: Text(article['publishedAt']),
-                                title: Text(
-                                  article['title'],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                subtitle: Text(
-                                  'Source: ${article['source']['name']}',
-                                ),
+                              child: GestureDetector(
                                 onTap: () => _openArticleDetail(article),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    article['urlToImage'] != null
+                                        ? Image.network(
+                                            article['urlToImage'],
+                                            fit: BoxFit.cover,
+                                            height:
+                                                120, // Adjust image height to fit well in the grid
+                                            width: double.infinity,
+                                          )
+                                        : const SizedBox(), // Placeholder if no image URL
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        article['title'],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                        ),
+                                        maxLines:
+                                            2, // Ensure title fits within two lines
+                                        overflow: TextOverflow
+                                            .ellipsis, // Truncate text if it overflows
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        'Source: ${article['source']['name']}',
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                    const Spacer(), // Pushes content to the bottom
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Author: ${article['author'] ?? 'Unknown'}',
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                          Text(
+                                            article['publishedAt'],
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
