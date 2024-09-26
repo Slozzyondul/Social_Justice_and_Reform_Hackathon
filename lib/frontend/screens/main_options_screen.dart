@@ -13,7 +13,7 @@ class MainOptionScreen extends StatelessWidget {
         title: const Center(child: Text('Choose an Option')),
         backgroundColor: Colors.grey,
       ),
-      drawer: _mainDrawer(),
+      drawer: _mainDrawer(context),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -75,7 +75,7 @@ class MainOptionScreen extends StatelessWidget {
     );
   }
 
-  Widget _mainDrawer() {
+  Widget _mainDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -83,17 +83,30 @@ class MainOptionScreen extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.search),
             title: const Text('Fact Check'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/facts');
+            },
           ),
           ListTile(
             leading: const Icon(Icons.report),
             title: const Text('Report'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/report');
+            },
           ),
           ListTile(
             leading: const Icon(Icons.newspaper),
             title: const Text('Hot Now'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/viewreport');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text('Youth Empowerment'),
+            onTap: () {
+              Navigator.pushNamed(context, '/youths');
+            },
           ),
         ],
       ),
