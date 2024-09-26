@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:solop/frontend/classes/detailed_report_class.dart';
+
 class ViewReportsScreen extends StatefulWidget {
   const ViewReportsScreen({super.key});
 
@@ -65,8 +67,9 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
           ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
               padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // Two items per row
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount:
+                    (MediaQuery.of(context).size.width / 300).floor(),
                 crossAxisSpacing: 10, // Space between columns
                 mainAxisSpacing: 10, // Space between rows
                 childAspectRatio: 0.75, // Aspect ratio to avoid overflow
@@ -78,35 +81,70 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                   color: Colors.grey[200],
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      spacing: 8.0,
-                      runSpacing: 4.0,
-                      children: [
-                        Text(
-                          report['title'] ?? '',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        const SizedBox(height: 10),
-                        Text('Description: ${report['description'] ?? ''}'),
-                        const SizedBox(height: 10),
-                        Text('Location: ${report['location'] ?? ''}'),
-                        const SizedBox(height: 10),
-                        Text('Verified: ${report['verified'] ? "Yes" : "No"}'),
-                        const SizedBox(height: 10),
-                        Text('Status: ${report['status'] ?? ''}'),
-                        if (report['media'] != null)
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ReportDetailScreen(report: report),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const SizedBox(height: 10),
-                              _isValidUrl(report['media'])
-                                  ? Image.network(report['media'], fit: BoxFit.cover)
-                                  : Image.file(File(report['media'])),
+                              Expanded(
+                                child: Text(
+                                  report['title'] ?? '',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Text(
+                                  'Verified: ${report['verified'] ? "Yes" : "No"}'),
                             ],
                           ),
-                      ],
+                          if (report['media'] != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: _isValidUrl(report['media'])
+                                  ? Image.network(
+                                      report['media'],
+                                      fit: BoxFit.cover,
+                                      height:
+                                          150, // Set a fixed height to avoid overflow
+                                    )
+                                  : Image.file(
+                                      File(report['media']),
+                                      fit: BoxFit.cover,
+                                      height: 150,
+                                    ),
+                            ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Description: ${report['description'] ?? ''}',
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Location: ${report['location'] ?? ''}'),
+                              const Spacer(),
+                              Text('Status: ${report['status'] ?? ''}'),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

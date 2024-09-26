@@ -104,14 +104,14 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
                         child: GridView.builder(
                           padding: const EdgeInsets.all(10),
                           gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // Number of items per row
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: (MediaQuery.of(context).size.width / 300).floor(),
                             crossAxisSpacing:
-                                10, // Horizontal space between grid items
+                                5, // Horizontal space between grid items
                             mainAxisSpacing:
-                                10, // Vertical space between grid items
+                                5, // Vertical space between grid items
                             childAspectRatio:
-                                0.8, // Adjust the ratio to fit the content properly
+                                1, // Adjust the ratio to fit the content properly
                           ),
                           itemCount: _articles.length,
                           itemBuilder: (context, index) {
