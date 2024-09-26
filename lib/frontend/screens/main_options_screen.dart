@@ -13,6 +13,7 @@ class MainOptionScreen extends StatelessWidget {
         title: const Center(child: Text('Choose an Option')),
         backgroundColor: Colors.grey,
       ),
+      drawer: _mainDrawer(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -58,6 +59,17 @@ class MainOptionScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _mainDrawer() {
+    return Drawer(
+      child: ListView(
+
+        padding: EdgeInsets.zero,
+        
+        
       ),
     );
   }
