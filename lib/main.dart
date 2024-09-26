@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:solop/frontend/screens/fact_check/fact_check.dart';
 import 'package:solop/frontend/screens/report/other_corruption_reports.dart';
 import 'package:solop/frontend/screens/report/report_corruption_screen.dart';
+import 'package:solop/frontend/screens/resources/material_resource.dart';
 import 'package:solop/frontend/screens/splash_screen_wrapper.dart';
 import 'package:solop/frontend/screens/youths/youth_empowerment.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/report': (context) => const ReportCorruptionScreen(),
         '/viewreport': (context) => const ViewReportsScreen(),
         '/youths': (context) => const YouthEmpowerment(),
+        '/resources': (context) =>  ResourceScreen(),
       },
     );
   }

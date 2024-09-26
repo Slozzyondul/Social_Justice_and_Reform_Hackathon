@@ -108,6 +108,14 @@ class MainOptionScreen extends StatelessWidget {
               Navigator.pushNamed(context, '/youths');
             },
           ),
+
+          ListTile(
+            leading: const Icon(Icons.book),
+            title: const Text('Resources'),
+            onTap: () {
+              Navigator.pushNamed(context, '/resources');
+            },
+          ),
         ],
       ),
     );

@@ -138,9 +138,49 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Location: ${report['location'] ?? ''}'),
+                              Text(' ${report['location'] ?? ''}'),
                               const Spacer(),
-                              Text('Status: ${report['status'] ?? ''}'),
+                              Text(' ${report['status'] ?? ''}'),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+
+                          // Upvote and Downvote Row
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.thumb_up),
+                                    color: Colors.green,
+                                    onPressed: () {
+                                      // Increase the upvote count and setState to update the UI
+                                      setState(() {
+                                        report['upvotes'] =
+                                            (report['upvotes'] ?? 0) + 1;
+                                      });
+                                    },
+                                  ),
+                                  Text(report['upvotes']?.toString() ?? '0'),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.thumb_down),
+                                    color: Colors.red,
+                                    onPressed: () {
+                                      // Increase the downvote count and setState to update the UI
+                                      setState(() {
+                                        report['downvotes'] =
+                                            (report['downvotes'] ?? 0) + 1;
+                                      });
+                                    },
+                                  ),
+                                  Text(report['downvotes']?.toString() ?? '0'),
+                                ],
+                              ),
                             ],
                           ),
                         ],
