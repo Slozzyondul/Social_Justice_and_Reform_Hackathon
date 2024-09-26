@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:solop/frontend/classes/comments_section.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -119,8 +120,7 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                                   ? Image.network(
                                       report['media'],
                                       fit: BoxFit.cover,
-                                      height:
-                                          150, // Set a fixed height to avoid overflow
+                                      height: 150,
                                     )
                                   : Image.file(
                                       File(report['media']),
@@ -166,6 +166,8 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                                 ],
                               ),
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   IconButton(
                                     icon: const Icon(Icons.thumb_down),
@@ -179,6 +181,20 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                                     },
                                   ),
                                   Text(report['downvotes']?.toString() ?? '0'),
+                                  TextButton.icon(
+                                    icon: const Icon(Icons.comment),
+                                    label: const Text('Comments'),
+                                    onPressed: () {
+                                      // Navigate to comment section or show dialog
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CommentsScreen(
+                                              reportId: report['id'] ?? 0),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ],
                               ),
                             ],

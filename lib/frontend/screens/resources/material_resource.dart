@@ -8,25 +8,25 @@ class ResourceScreen extends StatelessWidget {
       title: 'Civic Rights 101',
       description: 'Learn the basics of your civic rights and responsibilities.',
       category: 'Civic Rights',
-      link: 'https://example.com/civic-rights',
+      link: 'https://info.mzalendo.com/info/citizens-rights#:~:text=Protection%20of%20right%20to%20property,water%2C%20social%20security%20%26%20education)',
     ),
     Resource(
       title: 'Constitutional Law Overview',
       description: 'Understand the legal frameworks in your country.',
       category: 'Legal Frameworks',
-      link: 'https://example.com/legal-frameworks',
+      link: 'https://www.klrc.go.ke/index.php/constitution-of-kenya',
     ),
     Resource(
       title: 'Guide to Peaceful Activism',
       description: 'Explore peaceful activism strategies and methods.',
       category: 'Peaceful Activism',
-      link: 'https://example.com/peaceful-activism',
+      link: 'https://www.rightofassembly.info/country/kenya',
     ),
     Resource(
       title: 'Legal Aid Resources',
       description: 'Find free or low-cost legal aid services.',
       category: 'Legal Frameworks',
-      link: 'https://example.com/legal-aid',
+      link: 'https://lsk.or.ke/public-resources/',
     ),
     // Add more resources as needed
   ];
@@ -44,7 +44,7 @@ class ResourceScreen extends StatelessWidget {
             child: ListTile(
               title: Text(resource.title),
               subtitle: Text(resource.description),
-              trailing: Icon(Icons.link, color: Colors.blue),
+              trailing: const Icon(Icons.link, color: Colors.blue),
               onTap: () {
                 _openResource(resource.link);
               },
