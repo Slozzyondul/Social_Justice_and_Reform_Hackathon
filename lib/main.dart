@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         '/facts': (context) => const NewsFactCheckScreen(),
         '/report': (context) => const ReportCorruptionScreen(),
         '/viewreport': (context) => const ViewReportsScreen(),
-        '/youths': (context) => const YouthEmpowerment(),
+        '/youths': (context) =>  YouthEmpowerment(),
         '/resources': (context) =>  ResourceScreen(),
       },
     );

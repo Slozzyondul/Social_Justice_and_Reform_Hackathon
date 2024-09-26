@@ -80,6 +80,14 @@ class MainOptionScreen extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
+          const UserAccountsDrawerHeader(
+            accountName: Text('Visitor'),
+            accountEmail: Text('visitor@mail.com'),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.white,
+            ),
+            decoration: BoxDecoration(color: Colors.grey),
+          ),
           ListTile(
             leading: const Icon(Icons.search),
             title: const Text('Fact Check'),
@@ -108,7 +116,6 @@ class MainOptionScreen extends StatelessWidget {
               Navigator.pushNamed(context, '/youths');
             },
           ),
-
           ListTile(
             leading: const Icon(Icons.book),
             title: const Text('Resources'),
