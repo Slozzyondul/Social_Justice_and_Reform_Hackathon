@@ -10,6 +10,7 @@ class MainOptionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         title: const Center(child: Text('Choose an Option')),
         backgroundColor: Colors.grey,
       ),
@@ -121,6 +122,14 @@ class MainOptionScreen extends StatelessWidget {
             title: const Text('Resources'),
             onTap: () {
               Navigator.pushNamed(context, '/resources');
+            },
+          ),
+
+           ListTile(
+            leading: const Icon(Icons.policy),
+            title: const Text('Policies'),
+            onTap: () {
+              Navigator.pushNamed(context, '/policies');
             },
           ),
         ],
