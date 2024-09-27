@@ -132,6 +132,14 @@ class MainOptionScreen extends StatelessWidget {
               Navigator.pushNamed(context, '/policies');
             },
           ),
+
+          ListTile(
+            leading: const Icon(Icons.question_answer),
+            title: const Text('Awareness and Solutions'),
+            onTap: () {
+              Navigator.pushNamed(context, '/awareness');
+            },
+          ),
         ],
       ),
     );

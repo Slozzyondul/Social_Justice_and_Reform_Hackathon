@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solop/frontend/screens/awareness_solutions/awareness_and_solutions.dart';
 import 'package:solop/frontend/screens/fact_check/fact_check.dart';
 import 'package:solop/frontend/screens/policies/policy_tracking_screen.dart';
 import 'package:solop/frontend/screens/report/other_corruption_reports.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/youths': (context) =>  YouthEmpowerment(),
         '/resources': (context) =>  ResourceScreen(),
         '/policies': (context) => PolicyTrackingScreen(),
+        "/awareness": (context) => AwarenessAndSolutionsScreen(),
       },
     );
   }
