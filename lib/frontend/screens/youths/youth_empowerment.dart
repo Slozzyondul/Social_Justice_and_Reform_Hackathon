@@ -4,24 +4,25 @@ import 'package:url_launcher/url_launcher.dart'; // Import url_launcher package
 class YouthEmpowerment extends StatelessWidget {
   final List<Map<String, String>> mentorshipPrograms = [
     {'title': 'Tech Mentorship', 'description': 'Learn coding with experts.', 'link': 'https://plpacademy.powerlearnproject.org/available-courses'},
-    {'title': 'Business Mentorship', 'description': 'Entrepreneurship guidance.', 'link': 'https://example.com'},
+    {'title': 'Business Mentorship', 'description': 'Entrepreneurship guidance.', 'link': 'https://ajiradigital.go.ke/#/index'},
   ];
 
   final List<Map<String, String>> leadershipPrograms = [
-    {'title': 'Youth Leadership Summit', 'description': 'Develop leadership skills.', 'link': 'https://example.com'},
-    {'title': 'Community Leadership', 'description': 'Lead local projects.', 'link': 'https://example.com'},
+    {'title': 'Youth Leadership Summit', 'description': 'Develop leadership skills.', 'link': 'https://www.kenyaleadership.org/'},
+    {'title': 'Community Leadership', 'description': 'Lead local projects.', 'link': 'https://kenya.dotrust.org/'},
   ];
 
   final List<Map<String, String>> volunteerPrograms = [
-    {'title': 'Environmental Volunteering', 'description': 'Help protect the environment.', 'link': 'https://example.com'},
-    {'title': 'Teaching Volunteering', 'description': 'Teach kids in underprivileged areas.', 'link': 'https://example.com'},
+    {'title': 'Environmental Volunteering', 'description': 'Help protect the environment.', 'link': 'https://naturekenya.org/'},
+    {'title': 'Teaching Volunteering', 'description': 'Teach kids in underprivileged areas.', 'link': 'https://www.agape-volunteers.com/programmes/teaching-volunteer-in-kenya'},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Youth Empowerment'),
+        backgroundColor: Colors.grey,
+        title: const Center(child: Text('Youth Empowerment')),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
