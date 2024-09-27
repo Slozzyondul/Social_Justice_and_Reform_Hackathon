@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import url_launcher package
 
 class YouthEmpowerment extends StatelessWidget {
   final List<Map<String, String>> mentorshipPrograms = [
-    {'title': 'Tech Mentorship', 'description': 'Learn coding with experts.', 'link': 'https://example.com'},
+    {'title': 'Tech Mentorship', 'description': 'Learn coding with experts.', 'link': 'https://plpacademy.powerlearnproject.org/available-courses'},
     {'title': 'Business Mentorship', 'description': 'Entrepreneurship guidance.', 'link': 'https://example.com'},
   ];
 
@@ -20,10 +21,10 @@ class YouthEmpowerment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Youth Empowerment'),
+        title: const Text('Youth Empowerment'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         children: [
           buildSection(context, 'Mentorship Programs', mentorshipPrograms),
           buildSection(context, 'Leadership Programs', leadershipPrograms),
@@ -39,33 +40,34 @@ class YouthEmpowerment extends StatelessWidget {
       children: [
         Text(
           sectionTitle,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Column(
           children: programs.map((program) {
             return Card(
               child: ListTile(
                 title: Text(program['title'] ?? ''),
                 subtitle: Text(program['description'] ?? ''),
-                trailing: Icon(Icons.arrow_forward),
+                trailing: const Icon(Icons.arrow_forward),
                 onTap: () {
-                  // Open link or detailed page
+                  // Open link in browser
                   _launchURL(program['link']);
                 },
               ),
             );
           }).toList(),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }
 
-  void _launchURL(String? url) {
-    if (url != null) {
-      // Use a package like url_launcher to open URLs in the browser
-      // url_launcher.launch(url);
+  Future<void> _launchURL(String? url) async {
+    if (url != null && await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 }
