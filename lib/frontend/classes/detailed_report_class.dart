@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class ReportDetailScreen extends StatelessWidget {
@@ -11,7 +10,6 @@ class ReportDetailScreen extends StatelessWidget {
     final uri = Uri.tryParse(url);
     return uri != null && (uri.isScheme('http') || uri.isScheme('https'));
   }
-
 
   @override
   Widget build(BuildContext context) {

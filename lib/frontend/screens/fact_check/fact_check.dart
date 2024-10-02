@@ -84,17 +84,12 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              style: const ButtonStyle(
-                  backgroundColor: WidgetStateColor.transparent),
               onPressed: () {
                 if (_inputController.text.isNotEmpty) {
                   factCheck(_inputController.text);
                 }
               },
-              child: const Text(
-                'Verify Fact',
-                style: TextStyle(color: Colors.black),
-              ),
+              child: const Text('Verify Fact'),
             ),
             const SizedBox(height: 24),
             _loading
@@ -105,7 +100,9 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
                           padding: const EdgeInsets.all(10),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: (MediaQuery.of(context).size.width / 300).floor(),
+                            crossAxisCount:
+                                (MediaQuery.of(context).size.width / 300)
+                                    .floor(),
                             crossAxisSpacing:
                                 5, // Horizontal space between grid items
                             mainAxisSpacing:
