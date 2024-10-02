@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:solop/frontend/classes/comments_section.dart';
+import 'package:solop/frontend/classes/detailed_report_class.dart';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:solop/frontend/classes/detailed_report_class.dart';
 
 class ViewReportsScreen extends StatefulWidget {
   const ViewReportsScreen({super.key});
@@ -61,25 +61,29 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: const Center(child: Text('Reports')),
+        backgroundColor: Colors.blueGrey,
+        title: const Center(child: Text('Corruption Reports')),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(12),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount:
-                    (MediaQuery.of(context).size.width / 300).floor(),
-                crossAxisSpacing: 10, // Space between columns
-                mainAxisSpacing: 10, // Space between rows
-                childAspectRatio: 0.75, // Aspect ratio to avoid overflow
+                    (MediaQuery.of(context).size.width / 350).floor(),
+                crossAxisSpacing: 16, // Space between columns
+                mainAxisSpacing: 16, // Space between rows
+                childAspectRatio: 0.75, // Aspect ratio for proper layout
               ),
               itemCount: reports.length,
               itemBuilder: (context, index) {
                 final report = reports[index];
                 return Card(
-                  color: Colors.grey[200],
+                  elevation: 8, // Adds shadow
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: GestureDetector(
@@ -104,48 +108,62 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
+                                    color: Colors.black87,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               Text(
-                                  'Verified: ${report['verified'] ? "Yes" : "No"}'),
+                                report['verified'] ? "✔️ Verified" : "❌ Not Verified",
+                                style: TextStyle(
+                                  color: report['verified'] ? Colors.green : Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ],
                           ),
+                          const SizedBox(height: 8),
                           if (report['media'] != null)
                             Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: _isValidUrl(report['media'])
-                                  ? Image.network(
-                                      report['media'],
-                                      fit: BoxFit.cover,
-                                      height: 150,
-                                    )
-                                  : Image.file(
-                                      File(report['media']),
-                                      fit: BoxFit.cover,
-                                      height: 150,
-                                    ),
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: _isValidUrl(report['media'])
+                                    ? Image.network(
+                                        report['media'],
+                                        fit: BoxFit.cover,
+                                        height: 120,
+                                      )
+                                    : Image.file(
+                                        File(report['media']),
+                                        fit: BoxFit.cover,
+                                        height: 120,
+                                      ),
+                              ),
                             ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 8),
                           Text(
                             'Description: ${report['description'] ?? ''}',
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(color: Colors.black54),
                           ),
                           const Spacer(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(' ${report['location'] ?? ''}'),
-                              const Spacer(),
-                              Text(' ${report['status'] ?? ''}'),
+                              Text(
+                                'Location: ${report['location'] ?? ''}',
+                                style: const TextStyle(color: Colors.blueAccent),
+                              ),
+                              Text(
+                                'Status: ${report['status'] ?? ''}',
+                                style: const TextStyle(color: Colors.blueGrey),
+                              ),
                             ],
                           ),
-                          const SizedBox(height: 10),
-
-                          // Upvote and Downvote Row
+                          const SizedBox(height: 12),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -155,7 +173,6 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                                     icon: const Icon(Icons.thumb_up),
                                     color: Colors.green,
                                     onPressed: () {
-                                      // Increase the upvote count and setState to update the UI
                                       setState(() {
                                         report['upvotes'] =
                                             (report['upvotes'] ?? 0) + 1;
@@ -166,14 +183,11 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                                 ],
                               ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   IconButton(
                                     icon: const Icon(Icons.thumb_down),
                                     color: Colors.red,
                                     onPressed: () {
-                                      // Increase the downvote count and setState to update the UI
                                       setState(() {
                                         report['downvotes'] =
                                             (report['downvotes'] ?? 0) + 1;
@@ -185,7 +199,6 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
                                     icon: const Icon(Icons.comment),
                                     label: const Text('Comments'),
                                     onPressed: () {
-                                      // Navigate to comment section or show dialog
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
