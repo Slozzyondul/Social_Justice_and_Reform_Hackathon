@@ -62,7 +62,7 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
-        title: const Text('View Corruption Reports'),
+        title: const Center(child: Text('Reports')),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())

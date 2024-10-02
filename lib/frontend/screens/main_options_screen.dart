@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:solop/frontend/screens/fact_check/fact_check.dart';
-import 'package:solop/frontend/screens/report/other_corruption_reports.dart';
-import 'package:solop/frontend/screens/report/report_corruption_screen.dart';
 
 class MainOptionScreen extends StatelessWidget {
   const MainOptionScreen({super.key});
@@ -10,69 +7,82 @@ class MainOptionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         title: const Center(child: Text('Choose an Option')),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.deepPurpleAccent,
+        elevation: 5.0,
       ),
       drawer: _mainDrawer(context),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                style: const ButtonStyle(
-                    backgroundColor: WidgetStateColor.transparent),
-                onPressed: () {
-                  // Navigate to Fact Check Screen
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NewsFactCheckScreen()));
-                },
-                child: const Text(
-                  'Fact Check',
-                  style: TextStyle(color: Colors.black),
-                ),
+      body: Stack(
+        children: [
+          // Add a background gradient
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.purple, Colors.blueAccent],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-              const SizedBox(height: 32),
-              ElevatedButton(
-                style: const ButtonStyle(
-                    backgroundColor: WidgetStateColor.transparent),
-                onPressed: () {
-                  // Navigate to Report Corruption Screen
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const ReportCorruptionScreen()));
-                },
-                child: const Text(
-                  'Report Corruption',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              const SizedBox(height: 32),
-              ElevatedButton(
-                style: const ButtonStyle(
-                    backgroundColor: WidgetStateColor.transparent),
-                onPressed: () {
-                  // Navigate to Report Corruption Screen
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ViewReportsScreen()));
-                },
-                child: const Text(
-                  'View Corruption Reports',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildOptionButton(
+                    context,
+                    icon: Icons.search,
+                    label: 'Fact Check',
+                    route: '/facts',
+                    color: Colors.orangeAccent,
+                  ),
+                  const SizedBox(height: 20),
+                  _buildOptionButton(
+                    context,
+                    icon: Icons.report,
+                    label: 'Report Corruption',
+                    route: '/report',
+                    color: Colors.redAccent,
+                  ),
+                  const SizedBox(height: 20),
+                  _buildOptionButton(
+                    context,
+                    icon: Icons.newspaper,
+                    label: 'View Reports',
+                    route: '/viewreport',
+                    color: Colors.greenAccent,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  // Create a reusable button with an icon and background color
+  Widget _buildOptionButton(BuildContext context,
+      {required IconData icon,
+      required String label,
+      required String route,
+      required Color color}) {
+    return ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white, backgroundColor: color,
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        elevation: 8.0,
+      ),
+      icon: Icon(icon, size: 28),
+      label: Text(
+        label,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      onPressed: () {
+        Navigator.pushNamed(context, route);
+      },
     );
   }
 
@@ -87,61 +97,66 @@ class MainOptionScreen extends StatelessWidget {
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
             ),
-            decoration: BoxDecoration(color: Colors.grey),
+            decoration: BoxDecoration(color: Colors.deepPurpleAccent),
           ),
-          ListTile(
-            leading: const Icon(Icons.search),
-            title: const Text('Fact Check'),
-            onTap: () {
-              Navigator.pushNamed(context, '/facts');
-            },
+          _buildDrawerItem(
+            context,
+            icon: Icons.search,
+            label: 'Fact Check',
+            route: '/facts',
           ),
-          ListTile(
-            leading: const Icon(Icons.report),
-            title: const Text('Report'),
-            onTap: () {
-              Navigator.pushNamed(context, '/report');
-            },
+          _buildDrawerItem(
+            context,
+            icon: Icons.report,
+            label: 'Report',
+            route: '/report',
           ),
-          ListTile(
-            leading: const Icon(Icons.newspaper),
-            title: const Text('Hot Now'),
-            onTap: () {
-              Navigator.pushNamed(context, '/viewreport');
-            },
+          _buildDrawerItem(
+            context,
+            icon: Icons.newspaper,
+            label: 'Hot Now',
+            route: '/viewreport',
           ),
-          ListTile(
-            leading: const Icon(Icons.info),
-            title: const Text('Youth Empowerment'),
-            onTap: () {
-              Navigator.pushNamed(context, '/youths');
-            },
+          _buildDrawerItem(
+            context,
+            icon: Icons.info,
+            label: 'Youth Empowerment',
+            route: '/youths',
           ),
-          ListTile(
-            leading: const Icon(Icons.book),
-            title: const Text('Resources'),
-            onTap: () {
-              Navigator.pushNamed(context, '/resources');
-            },
+          _buildDrawerItem(
+            context,
+            icon: Icons.book,
+            label: 'Resources',
+            route: '/resources',
           ),
-
-           ListTile(
-            leading: const Icon(Icons.policy),
-            title: const Text('Policies'),
-            onTap: () {
-              Navigator.pushNamed(context, '/policies');
-            },
+          _buildDrawerItem(
+            context,
+            icon: Icons.policy,
+            label: 'Policies',
+            route: '/policies',
           ),
-
-          ListTile(
-            leading: const Icon(Icons.question_answer),
-            title: const Text('Awareness and Solutions'),
-            onTap: () {
-              Navigator.pushNamed(context, '/awareness');
-            },
+          _buildDrawerItem(
+            context,
+            icon: Icons.question_answer,
+            label: 'Awareness and Solutions',
+            route: '/awareness',
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(BuildContext context,
+      {required IconData icon, required String label, required String route}) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.deepPurpleAccent),
+      title: Text(
+        label,
+        style: const TextStyle(fontSize: 16),
+      ),
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
     );
   }
 }
