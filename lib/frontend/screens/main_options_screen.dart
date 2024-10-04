@@ -95,6 +95,7 @@ class MainOptionScreen extends StatelessWidget {
             accountName: Text('Visitor'),
             accountEmail: Text('visitor@mail.com'),
             currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/logo.png'),
               backgroundColor: Colors.white,
             ),
             decoration: BoxDecoration(color: Colors.deepPurpleAccent),
