@@ -7,7 +7,7 @@ class MainOptionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Choose an Option')),
+        title: const Center(child: Text('')),
         backgroundColor: Colors.deepPurpleAccent,
         elevation: 5.0,
       ),

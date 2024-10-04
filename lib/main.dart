@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Zii kwa Corruption',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
         useMaterial3: true,
       ),
       //home: const SplashScreenWrapper(),
