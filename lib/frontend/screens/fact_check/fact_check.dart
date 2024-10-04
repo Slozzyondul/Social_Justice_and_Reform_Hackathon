@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:solop/frontend/classes/detailed_article_class.dart';
 import 'dart:convert';
 
-import 'package:solop/frontend/widgets/build_button_widget.dart';
+import 'package:solop/frontend/widgets/fact_build_button_widget.dart';
 
 class NewsFactCheckScreen extends StatefulWidget {
   const NewsFactCheckScreen({super.key});
@@ -98,7 +98,7 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
               ),
               const SizedBox(height: 48),
               TextField(
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 controller: _inputController,
                 decoration: const InputDecoration(
                   labelText: 'Enter claim to fact-check',
@@ -110,7 +110,7 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              buildOptionButton(
+              buildOptionButtonFacts(
                 context,
                 icon: Icons.search,
                 label: 'Fact check',

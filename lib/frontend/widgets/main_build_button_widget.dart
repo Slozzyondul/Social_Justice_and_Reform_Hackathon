@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
-Widget buildOptionButton(BuildContext context,
+Widget buildOptionButtonMain(BuildContext context,
       {required IconData icon,
       required String label,
-      required VoidCallback onPressed,
+      required String route,
       required Color color}) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: color,
+        foregroundColor: Colors.white, backgroundColor: color,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 8.0,
@@ -18,6 +17,8 @@ Widget buildOptionButton(BuildContext context,
         label,
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
-      onPressed: onPressed,
+      onPressed: () {
+        Navigator.pushNamed(context, route);
+      },
     );
   }
