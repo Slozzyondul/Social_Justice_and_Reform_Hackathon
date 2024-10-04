@@ -87,7 +87,7 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 child: Text(
                   'Enter a keyword you would like to fact-check',
                   style: TextStyle(
@@ -96,13 +96,18 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 48),
+              const SizedBox(height: 48),
               TextField(
-                style: TextStyle(backgroundColor: Colors.white),
+                style: TextStyle(color: Colors.white),
                 controller: _inputController,
                 decoration: const InputDecoration(
-                    labelText: 'Enter claim to fact-check',
-                    border: OutlineInputBorder()),
+                  labelText: 'Enter claim to fact-check',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(32),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 16),
               buildOptionButton(
@@ -203,7 +208,10 @@ class _NewsFactCheckScreenState extends State<NewsFactCheckScreen> {
                             },
                           ),
                         )
-                      : const Text('No articles found.'),
+                      : const Text(
+                          'No articles found.',
+                          style: TextStyle(color: Colors.white70),
+                        ),
             ],
           ),
         ],
