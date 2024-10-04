@@ -21,7 +21,7 @@ class _AwarenessAndSolutionsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Raise Awareness & Suggest Local Solutions'),
+        title: const Text('Awareness & Solutions'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

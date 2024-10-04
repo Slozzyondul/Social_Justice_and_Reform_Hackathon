@@ -67,7 +67,7 @@ class _ReportCorruptionScreenState extends State<ReportCorruptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Report Corruption')),
+        title: const Center(child: Text('Report')),
         backgroundColor: Colors.deepPurpleAccent,
         elevation: 5.0,
       ),
