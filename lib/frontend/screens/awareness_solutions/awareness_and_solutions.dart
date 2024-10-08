@@ -21,7 +21,8 @@ class _AwarenessAndSolutionsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Awareness & Solutions'),
+        backgroundColor: Colors.deepPurpleAccent,
+        title: const Center(child: Text('Awareness & Solutions')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -61,7 +61,7 @@ class _ViewReportsScreenState extends State<ViewReportsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.deepPurpleAccent,
         title: const Center(child: Text('Reports')),
       ),
       body: isLoading

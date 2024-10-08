@@ -86,7 +86,7 @@ class MainOptionScreen extends StatelessWidget {
                       context,
                       icon: Icons.question_answer,
                       label: 'Awareness and Solutions',
-                      route: '/awarenesss',
+                      route: '/awareness',
                       color: Colors.orangeAccent,
                     ),
                   ],

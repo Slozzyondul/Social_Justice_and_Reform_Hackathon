@@ -35,7 +35,8 @@ class ResourceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Educational Resources'),
+        backgroundColor: Colors.deepPurpleAccent,
+        title: const Center(child: Text('Educational Resources')),
       ),
       body: ListView(
         padding: const EdgeInsets.all(8.0),

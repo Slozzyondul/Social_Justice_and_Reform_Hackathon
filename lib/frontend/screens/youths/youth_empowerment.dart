@@ -21,7 +21,7 @@ class YouthEmpowerment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.deepPurpleAccent,
         title: const Center(child: Text('Youth Empowerment')),
       ),
       body: ListView(

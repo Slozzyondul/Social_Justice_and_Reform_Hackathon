@@ -15,6 +15,7 @@ class ReportDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent,
         title: Text(report['title'] ?? 'Report Details'),
       ),
       body: Padding(
