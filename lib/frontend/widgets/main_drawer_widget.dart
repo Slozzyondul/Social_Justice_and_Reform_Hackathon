@@ -7,11 +7,11 @@ Widget mainDrawer(BuildContext context) {
         padding: EdgeInsets.zero,
         children: [
           const UserAccountsDrawerHeader(
-            accountName: Text('Visitor'),
-            accountEmail: Text('visitor@mail.com'),
+            accountName: Text(''),
+            accountEmail: Text(''),
             currentAccountPicture: CircleAvatar(
               backgroundImage: AssetImage('assets/images/logo.png'),
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.deepPurpleAccent,
             ),
             decoration: BoxDecoration(color: Colors.deepPurpleAccent),
           ),
