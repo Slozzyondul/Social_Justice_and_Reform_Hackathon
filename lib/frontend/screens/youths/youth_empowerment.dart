@@ -24,13 +24,22 @@ class YouthEmpowerment extends StatelessWidget {
         backgroundColor: Colors.deepPurpleAccent,
         title: const Center(child: Text('Youth Empowerment')),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          buildSection(context, 'Mentorship Programs', mentorshipPrograms),
-          buildSection(context, 'Leadership Programs', leadershipPrograms),
-          buildSection(context, 'Volunteer Programs', volunteerPrograms),
-        ],
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.purple, Colors.blueAccent],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            buildSection(context, 'Mentorship Programs', mentorshipPrograms),
+            buildSection(context, 'Leadership Programs', leadershipPrograms),
+            buildSection(context, 'Volunteer Programs', volunteerPrograms),
+          ],
+        ),
       ),
     );
   }

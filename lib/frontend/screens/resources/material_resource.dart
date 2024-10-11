@@ -6,9 +6,11 @@ class ResourceScreen extends StatelessWidget {
   final List<Resource> resources = [
     Resource(
       title: 'Civic Rights 101',
-      description: 'Learn the basics of your civic rights and responsibilities.',
+      description:
+          'Learn the basics of your civic rights and responsibilities.',
       category: 'Civic Rights',
-      link: 'https://info.mzalendo.com/info/citizens-rights#:~:text=Protection%20of%20right%20to%20property,water%2C%20social%20security%20%26%20education)',
+      link:
+          'https://info.mzalendo.com/info/citizens-rights#:~:text=Protection%20of%20right%20to%20property,water%2C%20social%20security%20%26%20education)',
     ),
     Resource(
       title: 'Constitutional Law Overview',
@@ -38,20 +40,29 @@ class ResourceScreen extends StatelessWidget {
         backgroundColor: Colors.deepPurpleAccent,
         title: const Center(child: Text('Educational Resources')),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(8.0),
-        children: resources.map((resource) {
-          return Card(
-            child: ListTile(
-              title: Text(resource.title),
-              subtitle: Text(resource.description),
-              trailing: const Icon(Icons.link, color: Colors.blue),
-              onTap: () {
-                _openResource(resource.link);
-              },
-            ),
-          );
-        }).toList(),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.purple, Colors.blueAccent],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: ListView(
+          padding: const EdgeInsets.all(8.0),
+          children: resources.map((resource) {
+            return Card(
+              child: ListTile(
+                title: Text(resource.title),
+                subtitle: Text(resource.description),
+                trailing: const Icon(Icons.link, color: Colors.blue),
+                onTap: () {
+                  _openResource(resource.link);
+                },
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
