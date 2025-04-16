@@ -10,9 +10,9 @@ CORS(app)
 def get_db_connection():
     connection = MySQLdb.connect(
         host="localhost",
-        user="ondul",  
+        user="solo",  
         passwd="o",
-        db="reports"
+        db="reports_db"
     )
     return connection
 
@@ -51,7 +51,7 @@ def get_reports():
 
     # Fetch reports from the database
     cursor.execute('''
-        SELECT title, description, location, media, verified, status
+        SELECT title, description, location, media, email, verified, status
         FROM reports
     ''')
     reports = cursor.fetchall()

@@ -84,6 +84,7 @@ CREATE TABLE reports (
     title VARCHAR(255),
     description TEXT,
     location VARCHAR(255),
+    email VARCHAR(255),
     media VARCHAR(255),
     verified BOOLEAN DEFAULT FALSE,
     status VARCHAR(50),
