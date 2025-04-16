@@ -71,7 +71,7 @@ Install MariaDB: Follow the instructions from MariaDB Downloads or use the comma
 (sudo apt install mariadb-server)
 
 Create a Database: Open the MariaDB shell: 
-(sudo mysql -u root -p)
+(sudo mysql -u root -p) or this:  /usr/bin/mariadb -u ondul -p
 
 Create the database and table:
 
